@@ -394,7 +394,7 @@ Include typical disclaimers about scope, data reliance, and so on.
 You are generating a "Table of Contents" in markdown for a forensic engineering report. 
 DO NOT use placeholders.
 
-It should include:
+It should include (Open Letter should be in bold, and the rest unbolded, and all of it should be about the same font size as the rest of the report):
 1. Opening Letter
 2. Introduction
 3. Authorization and Scope of Investigation
