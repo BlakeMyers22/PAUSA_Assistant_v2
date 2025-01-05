@@ -519,6 +519,10 @@ Guidelines:
 12. Do not call "Table of Contents" by its name at the top, because it is appearing twice. Similarly, do not call "Introduction" by its name in the final draft because it too is appearing twice.
 13. Make it so that each section is as long and detailed as possible. But don't ever end a section in midsentence. If you have to do that, just make it shorter to complete the last thought.
 14. And don't say things like "on [specific date],". Again, I emphasize, either use the date you have from the input, or if you don't know it, just don't say aything about it.
+15. Also, do not call "Conclusions and Recommendations" by its name in the final draft because it too is appearing twice.
+16. And do not call "Limitations" by its name in the final draft because it too is appearing twice.
+17. And do not call "Rebuttal" by its name in the final draft because it too is appearing twice.
+18. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
 `
         },
         {
