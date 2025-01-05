@@ -516,8 +516,9 @@ Guidelines:
 8. Incorporate custom instructions while maintaining standards
 9. Do NOT invent or use placeholders like [Client Name]. Use actual context values or 'N/A'.
 10. For the Table of Contents, use a clean, minimal layout in Markdown. Avoid bullet points or asterisks.
-11. Do not call "Table of Contents" by its name at the top, because it is appearing twice. Similarly, for "Introduction".
-11. Make it so that each section is as long and detailed as possible. But don't ever end a section in midsentence. If you have to do that, just make it shorter to complete the last thought.
+11. Do not use any brackets like this [] as placeholders to suggest something. If you don't know what it is, just ignore it or don't talk about unless you think it's absolutely necessary.
+12. Do not call "Table of Contents" by its name at the top, because it is appearing twice. Similarly, for "Introduction".
+13. Make it so that each section is as long and detailed as possible. But don't ever end a section in midsentence. If you have to do that, just make it shorter to complete the last thought.
 `
         },
         {
