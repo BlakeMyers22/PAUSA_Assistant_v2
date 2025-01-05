@@ -50,9 +50,191 @@
   <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold text-center mb-8">NSF INTAKE PROCESS</h1>
 
-    <!-- Your Form Here (Omitted for Brevity) -->
-    <!-- The same form code from your previous version goes here. -->
-    <!-- We'll assume your "claimForm" is unchanged, collecting data. -->
+    <!-- Main Form -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8" id="intakeContainer">
+      <form id="claimForm" class="space-y-6">
+        <!-- EXAMPLE FIELDS (replace or augment with your own) -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Client Credentials</h2>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Client Name</label>
+            <input type="text" id="clientName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Law Firm Name</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Phone Number</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Email</label>
+            <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+        </div>
+
+        <!-- PROJECT DATA -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Project Data</h2>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Project Name</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Property Owner Name</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Address</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Phone Number</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Email</label>
+            <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">DOL (Date of Loss)</label>
+            <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+        </div>
+
+        <!-- PROJECT BASIC INFORMATION -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Project Basic Information</h2>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Inspection Date</label>
+            <input type="date" id="investigationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+
+          <!-- Duplicate "Client Name" field for demonstration -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 font-bold">Project Name (again)</label>
+            <input type="text" id="clientName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Property Type</label>
+            <select id="propertyType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Property Age (Years)</label>
+            <input type="number" id="propertyAge" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Construction Type</label>
+            <input 
+              type="text" 
+              id="constructionType" 
+              placeholder="e.g., Steel frame with brick veneer" 
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" 
+              required 
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Current Use</label>
+            <input 
+              type="text" 
+              id="currentUse" 
+              placeholder="e.g., Commercial office space" 
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" 
+              required 
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Square Footage</label>
+            <input type="number" id="squareFootage" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+        </div>
+
+        <!-- CLAIM DATA -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Claim Data</h2>
+
+          <!-- Three checkboxes for Hail, Wind, Foundation -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Claim Type</label>
+            <div class="flex items-center space-x-4 mt-1">
+              <div>
+                <input type="checkbox" id="claimHail" class="rounded" />
+                <label for="claimHail" class="ml-1">Hail</label>
+              </div>
+              <div>
+                <input type="checkbox" id="claimWind" class="rounded" />
+                <label for="claimWind" class="ml-1">Wind</label>
+              </div>
+              <div>
+                <input type="checkbox" id="claimFoundation" class="rounded" />
+                <label for="claimFoundation" class="ml-1">Foundation</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Date of Loss (When damage was discovered)</label>
+            <input type="date" id="dateOfLoss" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Causation Date (When the cause occurred, if different)</label>
+            <input type="date" id="causationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+            <p class="text-sm text-gray-500 mt-1">Leave blank if same as Date of Loss</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Property Location (repeat address)</label>
+            <input 
+              type="text" 
+              id="location" 
+              placeholder="Full address including city, state, and ZIP" 
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" 
+              required
+            />
+          </div>
+        </div>
+
+        <!-- EXAMPLE: Engineer Credentials -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Engineer Credentials</h2>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="engineerName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="engineerEmail" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">License Number</label>
+            <input type="text" id="engineerLicense" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="text" id="engineerPhone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+        >
+          Complete Intake
+        </button>
+      </form>
+    </div>
 
     <!-- Section Generation Progress -->
     <div id="sectionProgress" class="hidden bg-white rounded-lg shadow-lg p-6 mb-8">
@@ -249,9 +431,17 @@
   </div>
 
   <script>
-    // =======================
-    // REPORT SECTIONS
-    // =======================
+    /* 
+     * ==========================================
+     *   SAME JAVASCRIPT LOGIC AS BEFORE 
+     *   (With form submission, section generation, 
+     *   final compile & download, etc.)
+     * ==========================================
+     */
+
+    // For example, fill out formContext, hide intake screen, show sectionProgress, etc.
+    // (Below is a minimal version; merge it with your existing code)
+    
     const reportSections = [
       { id: 'introduction', title: 'Introduction' },
       { id: 'authorization', title: 'Authorization and Scope of Investigation' },
@@ -265,19 +455,17 @@
       { id: 'tableOfContents', title: 'Table of Contents' },
       { id: 'openingLetter', title: 'Opening Letter' }
     ];
-
+    
     let currentSectionIndex = 0;
     let generatedSections = {};
     let formContext = {};
 
-    // Show/hide loading indicator
     function toggleLoading(show, message = 'Generating report section...') {
       const loader = document.getElementById('loadingIndicator');
       document.getElementById('loadingText').textContent = message;
       loader.classList.toggle('hidden', !show);
     }
 
-    // Update progress indicator color
     function updateProgress(sectionId, status) {
       const indicator = document.getElementById(`progress-${sectionId}`);
       if (indicator) {
@@ -288,7 +476,6 @@
       }
     }
 
-    // Reset rating UI
     function resetRatingUI() {
       document.getElementById('ratingFeedback').value = '';
       document.getElementById('wordCount').textContent = '0 words';
@@ -300,7 +487,6 @@
       document.getElementById('ratingPopup').classList.add('hidden');
     }
 
-    // Generate a section
     async function generateSection(sectionId, customInstructions = '') {
       toggleLoading(true, `Generating ${reportSections.find(s => s.id === sectionId).title}...`);
       try {
@@ -328,7 +514,6 @@
       }
     }
 
-    // Update section preview
     function updateSectionPreview(sectionId, content) {
       document.getElementById('currentSectionTitle').textContent =
         reportSections.find(s => s.id === sectionId).title;
@@ -336,9 +521,7 @@
       document.getElementById('sectionReview').classList.remove('hidden');
     }
 
-    // Compile final report, in specified order
     function compileFinalReport() {
-      // Reorder for final deliverable:
       const finalOrder = [
         'openingLetter',
         'tableOfContents',
@@ -366,12 +549,49 @@
       document.getElementById('reportPreview').classList.remove('hidden');
     }
 
-    // ==============================
-    // Form submission (example)
-    // ==============================
-    // (You will have a form with id="claimForm", collecting data, 
-    //  then setting formContext, then generating the first section.)
-    // For brevity, not shown in detail here.
+    // On form submission, gather data and start generating
+    document.getElementById('claimForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Collect the form data
+      const claimTypes = [];
+      if (document.getElementById('claimHail').checked) claimTypes.push('Hail');
+      if (document.getElementById('claimWind').checked) claimTypes.push('Wind');
+      if (document.getElementById('claimFoundation').checked) claimTypes.push('Foundation');
+
+      formContext = {
+        investigationDate: document.getElementById('investigationDate').value,
+        clientName: document.getElementById('clientName').value,
+        propertyType: document.getElementById('propertyType').value,
+        propertyAge: document.getElementById('propertyAge').value,
+        constructionType: document.getElementById('constructionType').value,
+        currentUse: document.getElementById('currentUse').value,
+        squareFootage: document.getElementById('squareFootage').value,
+        claimType: claimTypes,
+        dateOfLoss: document.getElementById('dateOfLoss').value,
+        causationDate: document.getElementById('causationDate').value || document.getElementById('dateOfLoss').value,
+        location: document.getElementById('location').value,
+        // If you have "Affected Areas," collect those too
+        // ...
+        engineerName: document.getElementById('engineerName').value,
+        engineerEmail: document.getElementById('engineerEmail').value,
+        engineerLicense: document.getElementById('engineerLicense').value,
+        engineerPhone: document.getElementById('engineerPhone').value
+      };
+
+      // Hide intake form, show section progress
+      document.getElementById('intakeContainer').classList.add('hidden');
+      document.getElementById('sectionProgress').classList.remove('hidden');
+
+      // Generate first section
+      try {
+        const content = await generateSection(reportSections[0].id);
+        generatedSections[reportSections[0].id] = content;
+        updateSectionPreview(reportSections[0].id, content);
+      } catch (err) {
+        alert('Failed to generate the first section. Please try again.');
+      }
+    });
 
     // Accept & Continue
     document.getElementById('acceptSection').addEventListener('click', async () => {
@@ -394,9 +614,7 @@
 
     // Regeneration
     function toggleRegenerationDialog(show) {
-      document
-        .getElementById('regenerationDialog')
-        .classList.toggle('hidden', !show);
+      document.getElementById('regenerationDialog').classList.toggle('hidden', !show);
       if (show) {
         document.getElementById('regenerationInstructions').value = '';
       }
@@ -465,14 +683,14 @@
     document.getElementById('downloadReport').addEventListener('click', () => {
       let reportContent = document.getElementById('completeReport').innerHTML;
 
-      // (Optional) Replace fancy punctuation with ASCII equivalents
+      // Optional: Replace fancy punctuation
       let sanitizedContent = reportContent
         .replace(/[‘’]/g, "'")
         .replace(/[“”]/g, '"')
         .replace(/—/g, "--")
         .replace(/–/g, "-");
 
-      // Ensure we have an HTML skeleton with meta charset
+      // Ensure HTML skeleton with meta charset
       if (!sanitizedContent.includes('<meta charset="UTF-8">')) {
         sanitizedContent = `
 <!DOCTYPE html>
