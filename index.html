@@ -53,7 +53,7 @@
     <!-- Main Form -->
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8" id="intakeContainer">
       <form id="claimForm" class="space-y-6">
-        <!-- EXAMPLE FIELDS (replace or augment with your own) -->
+        <!-- CLIENT CREDENTIALS -->
         <div class="space-y-4">
           <h2 class="text-xl font-semibold">Client Credentials</h2>
           
@@ -206,7 +206,399 @@
           </div>
         </div>
 
-        <!-- EXAMPLE: Engineer Credentials -->
+        <!-- PROPERTY ANALYSIS QUESTIONS -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">
+            Property Analysis Questions <span class="text-sm text-gray-600">(if applicable)</span>
+          </h2>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the purported cause of loss?
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How big was the hail and what direction did it come from?
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How intense was the wind and what direction did it come from?
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How many times has the roof been replaced?
+            </label>
+            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What year was the most recent roof installed?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What direction is the prevailing wind? (e.g., N, W, S, E)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the pitch of the majority of the roof?
+            </label>
+            <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+              <option value="1/12">1/12</option>
+              <option value="2/12">2/12</option>
+              <option value="3/12">3/12</option>
+              <option value="4/12">4/12</option>
+              <option value="5/12">5/12</option>
+              <option value="6/12">6/12</option>
+              <option value="7/12">7/12</option>
+              <option value="8/12">8/12</option>
+              <option value="9/12">9/12</option>
+              <option value="10/12">10/12</option>
+              <option value="11/12">11/12</option>
+              <option value="13/12">13/12</option>
+              <option value="14/12">14/12</option>
+              <option value="15/12">15/12</option>
+              <option value="16/12">16/12</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What size is the collateral damage or hail spatter?
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What damage is visible to parapet caps and other soft metals (vents, A/C units, gutters)?
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Measure the impacts and provide the size of the impact indention.
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+
+          <!-- Roof Type (metal, composition, single-ply, etc.) -->
+          <h3 class="font-bold">Roof Type</h3>
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <label class="font-bold">Metal</label>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is this roof aluminum or metal?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What gauge is the roofing material?
+            </label>
+            <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+              <option value="29">29</option>
+              <option value="28">28</option>
+              <option value="27">27</option>
+              <option value="26">26</option>
+              <option value="25">25</option>
+              <option value="24">24</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Select all that apply:
+            </label>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">PBR Panel</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Standing Seam</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Trapezoidal</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Corrugated</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Decra</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Aluminum Shake</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Other (Please specify below)</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Additional engineer notes (if "Other")</label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              If it is PBR panel, in which direction is the short lap facing?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there gaps in the seam caused by wind or hail?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is the roof capable of shedding water as it did prior to the weather event?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Composition Shingles -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Composition Shingles</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Identify the number of damaged shingles on wind-facing vs. leeward side
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How many different slopes of the roof are damaged?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How many shingles are damaged in a 100 sq/ft test square?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are the shingles able to survive a “brittle test”?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the density or weight of the shingles?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Single-Ply Membrane -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Single-Ply Membrane</h3>
+          </div>
+          <div class="space-y-2">
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">TPO</label>
+            </div>
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">EPDM</label>
+            </div>
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">PVC</label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is the membrane fully adhered or mechanically fastened?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there visible penetrations in the membrane?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Modified Bitumen -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Modified Bitumen</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is there visible hail damage to the mod-bit?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Built Up Roofing w/ Gravel Ballast -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Built Up Roofing w/ Gravel Ballast</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there “bird nests” present in the gravel ballast?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Does the underlying matting show visible hail damage?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Clay Tile Roofing -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Clay Tile Roofing</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Who is the manufacturer?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is this a discontinued product?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How old is the roof?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How is the tile attached? (e.g. mortar bed, nailed, or both)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the underlayment? (e.g., rolled roofing, tar paper, synthetic)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is drip edge present?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What shape is the tile? (e.g. flat, mission, Spanish, French, Riviera, Pantile)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Concrete Tile Roofing -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Concrete Tile Roofing</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Who is the manufacturer?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Is this a discontinued product?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">How old is the roof?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">How is the tile attached?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">What is the underlayment?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Is drip edge present?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What shape is the tile? (e.g. flat, mission, Spanish, French, Riviera, Pantile)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+        </div>
+
+        <!-- DAMAGE ASSESSMENT -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold">Damage Assessment</h2>
+          
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Affected Areas</label>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input type="checkbox" id="roof" class="rounded" />
+                <label for="roof" class="ml-2">Roof</label>
+              </div>
+              <div>
+                <input type="checkbox" id="siding" class="rounded" />
+                <label for="siding" class="ml-2">Siding</label>
+              </div>
+              <div>
+                <input type="checkbox" id="windows" class="rounded" />
+                <label for="windows" class="ml-2">Windows</label>
+              </div>
+              <div>
+                <input type="checkbox" id="gutters" class="rounded" />
+                <label for="gutters" class="ml-2">Gutters</label>
+              </div>
+              <div>
+                <input type="checkbox" id="foundation" class="rounded" />
+                <label for="foundation" class="ml-2">Foundation</label>
+              </div>
+              <div>
+                <input type="checkbox" id="interior" class="rounded" />
+                <label for="interior" class="ml-2">Interior</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Engineer Notes</label>
+            <textarea 
+              id="engineerNotes" 
+              rows="4" 
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" 
+              placeholder="Enter your engineering observations, measurements, and technical specifications."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- ENGINEER CREDENTIALS -->
         <div class="space-y-4">
           <h2 class="text-xl font-semibold">Engineer Credentials</h2>
           <div>
@@ -227,6 +619,7 @@
           </div>
         </div>
 
+        <!-- Final button -->
         <button 
           type="submit" 
           class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
@@ -310,41 +703,13 @@
           >
             <p class="text-sm text-gray-600 mb-2">Rate this section (1-7):</p>
             <div class="flex space-x-2 mb-4">
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="1"
-              >1</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="2"
-              >2</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="3"
-              >3</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="4"
-              >4</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="5"
-              >5</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="6"
-              >6</button>
-              <button 
-                class="rating-button w-8 h-8 rounded-full border border-gray-300 hover:bg-blue-100 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                data-rating="7"
-              >7</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="1">1</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="2">2</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="3">3</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="4">4</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="5">5</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="6">6</button>
+              <button class="rating-button w-8 h-8 rounded-full border border-gray-300" data-rating="7">7</button>
             </div>
             <div class="mb-4">
               <label class="block text-sm text-gray-600 mb-2">Feedback (minimum 10 words):</label>
@@ -358,8 +723,7 @@
             </div>
             <button 
               id="submitRating" 
-              class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 
-                     disabled:bg-gray-300 disabled:cursor-not-allowed"
+              class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
               disabled
             >
               Submit Rating
@@ -431,17 +795,13 @@
   </div>
 
   <script>
-    /* 
-     * ==========================================
-     *   SAME JAVASCRIPT LOGIC AS BEFORE 
-     *   (With form submission, section generation, 
-     *   final compile & download, etc.)
-     * ==========================================
-     */
+    /***************************************************
+     *   Your JavaScript from the previous code goes here
+     *   (Section generation, rating, final download, etc.)
+     ***************************************************/
 
-    // For example, fill out formContext, hide intake screen, show sectionProgress, etc.
-    // (Below is a minimal version; merge it with your existing code)
-    
+    // Example of merging all logic:
+
     const reportSections = [
       { id: 'introduction', title: 'Introduction' },
       { id: 'authorization', title: 'Authorization and Scope of Investigation' },
@@ -455,7 +815,7 @@
       { id: 'tableOfContents', title: 'Table of Contents' },
       { id: 'openingLetter', title: 'Opening Letter' }
     ];
-    
+
     let currentSectionIndex = 0;
     let generatedSections = {};
     let formContext = {};
@@ -561,7 +921,7 @@
 
       formContext = {
         investigationDate: document.getElementById('investigationDate').value,
-        clientName: document.getElementById('clientName').value,
+        clientName: document.getElementById('clientName').value, 
         propertyType: document.getElementById('propertyType').value,
         propertyAge: document.getElementById('propertyAge').value,
         constructionType: document.getElementById('constructionType').value,
@@ -571,12 +931,19 @@
         dateOfLoss: document.getElementById('dateOfLoss').value,
         causationDate: document.getElementById('causationDate').value || document.getElementById('dateOfLoss').value,
         location: document.getElementById('location').value,
-        // If you have "Affected Areas," collect those too
-        // ...
+        engineerNotes: document.getElementById('engineerNotes').value,
         engineerName: document.getElementById('engineerName').value,
         engineerEmail: document.getElementById('engineerEmail').value,
         engineerLicense: document.getElementById('engineerLicense').value,
-        engineerPhone: document.getElementById('engineerPhone').value
+        engineerPhone: document.getElementById('engineerPhone').value,
+        affectedAreas: [
+          ...(document.getElementById('roof').checked ? ['Roof'] : []),
+          ...(document.getElementById('siding').checked ? ['Siding'] : []),
+          ...(document.getElementById('windows').checked ? ['Windows'] : []),
+          ...(document.getElementById('gutters').checked ? ['Gutters'] : []),
+          ...(document.getElementById('foundation').checked ? ['Foundation'] : []),
+          ...(document.getElementById('interior').checked ? ['Interior'] : [])
+        ]
       };
 
       // Hide intake form, show section progress
