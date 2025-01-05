@@ -515,6 +515,8 @@ Guidelines:
 7. Ensure completeness
 8. Incorporate custom instructions while maintaining standards
 9. Do NOT invent or use placeholders like [Client Name]. Use actual context values or 'N/A'.
+10. For the Table of Contents, use a clean, minimal layout in Markdown. Avoid bullet points or asterisks.
+11. Make it so that each section is as long and detailed as possible.
 `
         },
         {
@@ -522,7 +524,7 @@ Guidelines:
           content: finalPrompt
         }
       ],
-      temperature: 0.3,  // Lower temperature = less creative filler
+      temperature: 0.5,  // Lower temperature = less creative filler
       max_tokens: 1000
     });
 
