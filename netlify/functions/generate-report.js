@@ -523,6 +523,7 @@ Guidelines:
 16. And do not call "Limitations" by its name in the final draft because it too is appearing twice.
 17. And do not call "Rebuttal" by its name in the final draft because it too is appearing twice.
 18. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
+19. Only use N/A when absolutely necessary. Always try to get the information from the initial inputs from the first page for the user.
 `
         },
         {
