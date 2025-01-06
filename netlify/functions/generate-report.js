@@ -302,12 +302,18 @@ async function generateSectionPrompt(sectionName, context, weatherData, customIn
   const basePrompts = {
     introduction: `
 You are writing the "Introduction" section for a forensic engineering report.
+DO NOT invent placeholder addresses. Use this address: "${safeString(context?.address, 'N/A')}"
 DO NOT invent placeholder text like [Client Name or Entity]. Use "${clientName}" or "N/A" if missing.
+for the property location.
 
-Emphasize the reason for this inspection, the property type, 
-the date(s) involved (${investigationDate}, ${dateOfLoss}), 
-and mention that further details follow in subsequent sections.
-Use professional engineering language.
+Points to Cover:
+1. Reason for inspection (hail, wind, etc.)
+2. Property type: ${safeString(context?.propertyType)}
+3. Date(s) involved: ${safeString(context?.dateOfLoss)} or ${safeString(context?.investigationDate)}
+4. Any other relevant background from context
+
+Mention that further details follow in subsequent sections.
+Maintain a concise, professional tone, and professional engineering language.
 `,
 
     authorization: `
