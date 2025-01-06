@@ -51,11 +51,11 @@
     <!-- Title changed to NSF Inspection Process -->
     <h1 class="text-3xl font-bold text-center mb-8">NSF INSPECTION PROCESS</h1>
 
-    <!-- Main Form -->
+    <!-- Main Form (Client Credentials section removed) -->
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8" id="intakeContainer">
       <form id="claimForm" class="space-y-6">
-
-        <!-- PROJECT DATA (Client Credentials section was removed) -->
+        
+        <!-- PROJECT DATA -->
         <div class="space-y-4">
           <h2 class="text-xl font-semibold">Project Data</h2>
 
@@ -94,6 +94,7 @@
             <input type="date" id="investigationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
           </div>
 
+          <!-- Duplicated project name -->
           <div>
             <label class="block text-sm font-medium text-gray-700 font-bold">Project Name (again)</label>
             <input type="text" id="clientName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
@@ -144,7 +145,7 @@
         <div class="space-y-4">
           <h2 class="text-xl font-semibold">Claim Data</h2>
 
-          <!-- Checkboxes for Hail, Wind, Foundation -->
+          <!-- Claim Type checkboxes (Hail, Wind, Foundation) -->
           <div>
             <label class="block text-sm font-medium text-gray-700">Claim Type</label>
             <div class="flex items-center space-x-4 mt-1">
@@ -168,7 +169,7 @@
             <input type="date" id="dateOfLoss" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Causation Date (If different)</label>
+            <label class="block text-sm font-medium text-gray-700">Causation Date (When the cause occurred, if different)</label>
             <input type="date" id="causationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
             <p class="text-sm text-gray-500 mt-1">Leave blank if same as Date of Loss</p>
           </div>
@@ -179,6 +180,7 @@
           <h2 class="text-xl font-semibold">
             Property Analysis Questions <span class="text-sm text-gray-600">(if applicable)</span>
           </h2>
+
           <div>
             <label class="block text-sm font-medium text-gray-700">
               What is the purported cause of loss?
@@ -211,7 +213,7 @@
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">
-              What direction is the prevailing wind? (N, W, S, E)
+              What direction is the prevailing wind? (e.g., N, W, S, E)
             </label>
             <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
           </div>
@@ -256,7 +258,7 @@
             <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
           </div>
 
-          <!-- Example: Roof Type (metal, shingles, etc.) -->
+          <!-- Roof Type section (with multiple sub-categories) -->
           <h3 class="font-bold">Roof Type</h3>
           <div class="flex items-center space-x-2">
             <input type="checkbox" class="rounded" />
@@ -268,7 +270,256 @@
             </label>
             <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
           </div>
-          <!-- etc... (remaining roof questions) -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What gauge is the roofing material?
+            </label>
+            <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+              <option value="29">29</option>
+              <option value="28">28</option>
+              <option value="27">27</option>
+              <option value="26">26</option>
+              <option value="25">25</option>
+              <option value="24">24</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Select all that apply:
+            </label>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">PBR Panel</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Standing Seam</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Trapezoidal</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Corrugated</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Decra</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Aluminum Shake</label>
+              </div>
+              <div>
+                <input type="checkbox" class="rounded" />
+                <label class="ml-2">Other (Please specify below)</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Additional engineer notes (if "Other")</label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              If it is PBR panel, in which direction is the short lap facing?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there gaps in the seam caused by wind or hail?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is the roof capable of shedding water as it did prior to the weather event?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Composition Shingles -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Composition Shingles</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Identify the number of damaged shingles on wind-facing vs. leeward side
+            </label>
+            <textarea rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How many different slopes of the roof are damaged?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How many shingles are damaged in a 100 sq/ft test square?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are the shingles able to survive a “brittle test”?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the density or weight of the shingles?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Single-Ply Membrane -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Single-Ply Membrane</h3>
+          </div>
+          <div class="space-y-2">
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">TPO</label>
+            </div>
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">EPDM</label>
+            </div>
+            <div>
+              <input type="checkbox" class="rounded" />
+              <label class="ml-2">PVC</label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is the membrane fully adhered or mechanically fastened?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there visible penetrations in the membrane?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Modified Bitumen -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Modified Bitumen</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is there visible hail damage to the mod-bit?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Built Up Roofing w/ Gravel Ballast -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Built Up Roofing w/ Gravel Ballast</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Are there “bird nests” present in the gravel ballast?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Does the underlying matting show visible hail damage?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Clay Tile Roofing -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Clay Tile Roofing</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Who is the manufacturer?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is this a discontinued product?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How old is the roof?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              How is the tile attached? (e.g. mortar bed, nailed, or both)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What is the underlayment? (e.g., rolled roofing, tar paper, synthetic)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Is drip edge present?
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What shape is the tile? (e.g. flat, mission, Spanish, French, Riviera, Pantile)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+
+          <!-- Concrete Tile Roofing -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" class="rounded" />
+            <h3 class="font-bold">Concrete Tile Roofing</h3>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Who is the manufacturer?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Is this a discontinued product?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">How old is the roof?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">How is the tile attached?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">What is the underlayment?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Is drip edge present?</label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              What shape is the tile? (e.g. flat, mission, Spanish, French, Riviera, Pantile)
+            </label>
+            <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+          </div>
         </div>
 
         <!-- DAMAGE ASSESSMENT -->
@@ -351,6 +602,7 @@
     <div id="sectionProgress" class="hidden bg-white rounded-lg shadow-lg p-6 mb-8">
       <h2 class="text-xl font-semibold mb-4">Report Generation Progress</h2>
       <div class="space-y-2">
+        <!-- Just an example of sections; match your actual IDs in netlify function -->
         <div class="flex items-center space-x-2">
           <div class="w-4 h-4 rounded-full bg-gray-200" id="progress-introduction"></div>
           <span>Introduction</span>
@@ -513,6 +765,7 @@
     /***************************************************
      * JavaScript: Collect data, handle form submission,
      * generate sections, handle ratings & downloads, etc.
+     * Make sure your Netlify function is at /.netlify/functions/generate-report
      ***************************************************/
 
     const reportSections = [
@@ -576,13 +829,14 @@
     }
 
     function updateSectionPreview(sectionId, content) {
-      document.getElementById('currentSectionTitle').textContent =
-        reportSections.find(s => s.id === sectionId).title;
+      const secObj = reportSections.find(s => s.id === sectionId);
+      document.getElementById('currentSectionTitle').textContent = secObj ? secObj.title : 'Unknown Section';
       document.getElementById('currentSectionContent').innerHTML = marked.parse(content);
       document.getElementById('sectionReview').classList.remove('hidden');
     }
 
     function compileFinalReport() {
+      // The final order if you want Opening Letter first, then Table of Contents, etc.
       const finalOrder = [
         'openingLetter',
         'tableOfContents',
@@ -599,7 +853,7 @@
       let reportContent = '';
       finalOrder.forEach(secId => {
         if (generatedSections[secId]) {
-          const secTitle = reportSections.find(s => s.id === secId).title;
+          const secTitle = reportSections.find(s => s.id === secId)?.title || secId;
           reportContent += `# ${secTitle}\n\n${generatedSections[secId]}\n\n`;
         }
       });
@@ -608,12 +862,11 @@
       document.getElementById('reportPreview').classList.remove('hidden');
     }
 
-    // ================== FORM SUBMISSION ==================
+    // ====================== FORM SUBMISSION ======================
     document.getElementById('claimForm').addEventListener('submit', async e => {
       e.preventDefault();
 
-      // Collect all the data from the form
-      // (adjust or remove references if some fields aren't actually used)
+      // Gather data from all fields
       const claimTypes = [];
       if (document.getElementById('claimHail').checked) claimTypes.push('Hail');
       if (document.getElementById('claimWind').checked) claimTypes.push('Wind');
@@ -633,12 +886,12 @@
         constructionType: document.getElementById('constructionType').value,
         currentUse: document.getElementById('currentUse').value,
         squareFootage: document.getElementById('squareFootage').value,
+        
         claimType: claimTypes,
         dateOfLoss: document.getElementById('dateOfLoss').value,
         causationDate: document.getElementById('causationDate').value || document.getElementById('dateOfLoss').value,
-        // property location was removed at your request
 
-        // Checkboxes for affected areas
+        // Affected areas checkboxes
         affectedAreas: [
           ...(document.getElementById('roof').checked ? ['Roof'] : []),
           ...(document.getElementById('siding').checked ? ['Siding'] : []),
@@ -665,7 +918,7 @@
         generatedSections[reportSections[0].id] = content;
         updateSectionPreview(reportSections[0].id, content);
       } catch (err) {
-        alert('Failed to generate the first section. See console logs.');
+        alert('Failed to generate the first section. Please check console logs.');
       }
     });
 
@@ -677,17 +930,17 @@
         return;
       }
       try {
-        const nextSection = reportSections[currentSectionIndex];
-        const content = await generateSection(nextSection.id);
-        generatedSections[nextSection.id] = content;
-        updateSectionPreview(nextSection.id, content);
+        const nextSectionId = reportSections[currentSectionIndex].id;
+        const content = await generateSection(nextSectionId);
+        generatedSections[nextSectionId] = content;
+        updateSectionPreview(nextSectionId, content);
       } catch (err) {
         alert('Failed to generate next section. See console logs.');
         currentSectionIndex--;
       }
     });
 
-    // REGENERATION
+    // Regeneration logic
     function toggleRegenerationDialog(show) {
       document.getElementById('regenerationDialog').classList.toggle('hidden', !show);
       if (show) {
@@ -704,16 +957,16 @@
       const instructions = document.getElementById('regenerationInstructions').value.trim();
       toggleRegenerationDialog(false);
       try {
-        const currentSection = reportSections[currentSectionIndex];
-        const content = await generateSection(currentSection.id, instructions);
-        generatedSections[currentSection.id] = content;
-        updateSectionPreview(currentSection.id, content);
+        const sectionId = reportSections[currentSectionIndex].id;
+        const content = await generateSection(sectionId, instructions);
+        generatedSections[sectionId] = content;
+        updateSectionPreview(sectionId, content);
       } catch (err) {
         alert('Failed to regenerate section. See console logs.');
       }
     });
 
-    // RATING
+    // Rating logic
     document.getElementById('rateSection').addEventListener('click', () => {
       document.getElementById('ratingPopup').classList.toggle('hidden');
     });
@@ -723,16 +976,12 @@
           x.classList.remove('bg-blue-500', 'text-white');
         });
         btn.classList.add('bg-blue-500', 'text-white');
-        const wordCount = document
-          .getElementById('ratingFeedback')
-          .value.trim()
-          .split(/\s+/)
-          .filter(word => word.length > 0).length;
-        document.getElementById('submitRating').disabled = !(wordCount >= 10);
+        const words = document.getElementById('ratingFeedback').value.trim().split(/\s+/).filter(w => w.length > 0);
+        document.getElementById('submitRating').disabled = !(words.length >= 10);
       });
     });
     document.getElementById('ratingFeedback').addEventListener('input', e => {
-      const words = e.target.value.trim().split(/\s+/).filter(word => word.length > 0);
+      const words = e.target.value.trim().split(/\s+/).filter(w => w.length > 0);
       document.getElementById('wordCount').textContent = `${words.length} words`;
       const hasRating = document.querySelector('.rating-button.bg-blue-500') !== null;
       document.getElementById('submitRating').disabled = !(words.length >= 10 && hasRating);
@@ -754,10 +1003,10 @@
       }
     });
 
-    // DOWNLOAD REPORT
+    // Download final report
     document.getElementById('downloadReport').addEventListener('click', () => {
       let reportContent = document.getElementById('completeReport').innerHTML;
-      // optional sanitize fancy punctuation
+      // optional sanitization
       let sanitizedContent = reportContent
         .replace(/[‘’]/g, "'")
         .replace(/[“”]/g, '"')
