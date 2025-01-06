@@ -524,6 +524,7 @@ Guidelines:
 17. And do not call "Rebuttal" by its name in the final draft because it too is appearing twice.
 18. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
 19. Only use N/A when absolutely necessary. And try very hard not to use it. Always try to get the information from the initial inputs from the first page for the user.
+20. For Location near the top of the Opening Letter, it should not say N/A. It should give the location from the input of Address under Project Data.
 `
         },
         {
