@@ -532,7 +532,7 @@ Guidelines:
           content: finalPrompt
         }
       ],
-      temperature: 0.7,  // Lower temperature = less creative filler
+      temperature: 0.4,  // Lower temperature = less creative filler
       max_tokens: 4000
     });
 
