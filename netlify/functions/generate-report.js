@@ -289,7 +289,7 @@ async function generateSectionPrompt(sectionName, context, weatherData, customIn
   const constructionType    = safeString(context?.constructionType);
   const currentUse          = safeString(context?.currentUse);
   const squareFootage       = safeString(context?.squareFootage);
-  const location            = safeString(context?.location);
+  const location            = safeString(context?.address);
   const clientName          = safeString(context?.clientName);
 
   // Engineer credentials
@@ -419,7 +419,7 @@ Cause(s): ${claimTypeString}
 Property: ${clientName}
 Location: ${location}
 
-Dear [Somebody],
+Dear ${clientName},
 
 North Star Forensics, LLC (NSF) is pleased to submit this report 
 for the above-referenced file. By signature below, this report was authorized 
