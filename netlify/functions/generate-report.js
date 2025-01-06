@@ -369,7 +369,7 @@ and how they correlate to the claimed damages.
 
     conclusions: `
 You are writing the "Conclusions and Recommendations" section.
-DO NOT use placeholders.
+DO NOT use placeholders. The address/location should be from ${safeString(context?.address)}
 
 1) Summarize main findings
 2) Tie back to the cause(s) of loss
