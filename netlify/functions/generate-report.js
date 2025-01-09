@@ -192,11 +192,12 @@ const openai = new OpenAI({
 
 
 
+
 /**
  * Utility function: Safely convert a value to a string,
  * returning fallback if it's null/undefined or empty.
  */
-function safeString(value, fallback = 'N/A') {
+function safeString(value, fallback = '') {
   if (typeof value === 'string' && value.trim() !== '') {
     return value;
   }
@@ -204,18 +205,18 @@ function safeString(value, fallback = 'N/A') {
 }
 
 /**
- * Utility function: Safely join an array. If it's not a valid array,
- * or it's empty, return fallback.
+ * Utility function: Safely join an array. If it's not a valid array
+ * or it's empty, return an empty string.
  */
-function safeArrayJoin(arr, fallback = 'N/A', separator = ', ') {
+function safeArrayJoin(arr, separator = ', ') {
   if (Array.isArray(arr) && arr.length > 0) {
     return arr.join(separator);
   }
-  return fallback;
+  return '';
 }
 
 /**
- * Utility function: Safely parse a date. 
+ * Utility function: Safely parse a date.
  * If parsing fails or the input is missing, return null.
  */
 function safeParseDate(dateString) {
@@ -226,21 +227,33 @@ function safeParseDate(dateString) {
 }
 
 /**
- * Fetch historical weather data with safe checks. 
+ * Fetch historical weather data with safe checks.
+ * If the date is in the future or unavailable, we handle that gracefully.
  */
 async function getWeatherData(location, dateString) {
   try {
-    // If location or date is missing, skip
     if (!location || !dateString) {
       return { success: true, data: {} };
     }
-
     const dateObj = safeParseDate(dateString);
     if (!dateObj) {
       return { success: true, data: {} };
     }
+
+    // If the date is after "today", skip or note it.
+    const today = new Date();
+    if (dateObj > today) {
+      return { 
+        success: true, 
+        data: {
+          note: `Weather data not found for a future date: ${dateObj.toISOString().split('T')[0]}`
+        } 
+      };
+    }
+
     const formattedDate = dateObj.toISOString().split('T')[0];
 
+    // Attempt call to WeatherAPI
     const response = await axios.get('http://api.weatherapi.com/v1/history.json', {
       params: {
         key: process.env.WEATHER_API_KEY,
@@ -252,7 +265,7 @@ async function getWeatherData(location, dateString) {
     const dayData = response.data.forecast.forecastday[0].day;
     const hourlyData = response.data.forecast.forecastday[0].hour;
     const maxWindGust = Math.max(...hourlyData.map(hour => hour.gust_mph));
-    const maxWindTime = hourlyData.find(hour => hour.gust_mph === maxWindGust)?.time || 'N/A';
+    const maxWindTime = hourlyData.find(hour => hour.gust_mph === maxWindGust)?.time || '';
 
     return {
       success: true,
@@ -261,7 +274,7 @@ async function getWeatherData(location, dateString) {
         minTemp: `${dayData.mintemp_f}°F`,
         avgTemp: `${dayData.avgtemp_f}°F`,
         maxWindGust: `${maxWindGust} mph`,
-        maxWindTime: maxWindTime,
+        maxWindTime,
         totalPrecip: `${dayData.totalprecip_in} inches`,
         humidity: `${dayData.avghumidity}%`,
         conditions: dayData.condition.text,
@@ -276,195 +289,221 @@ async function getWeatherData(location, dateString) {
 }
 
 /**
- * Build the prompt for each section, with explicit instructions
- * to avoid placeholders. We also do safe checks on all fields.
+ * Build the prompt for each section, making sure we avoid
+ * placeholders, contradictory roof info, multi-story references
+ * if it's a single story, etc.
  */
 async function generateSectionPrompt(sectionName, context, weatherData, customInstructions = '') {
-  // Safely deconstruct fields from context
+  // Extract fields
   const investigationDate   = safeString(context?.investigationDate);
   const dateOfLoss          = safeString(context?.dateOfLoss);
-  const claimTypeString     = safeArrayJoin(context?.claimType, 'N/A');
+  const claimTypeString     = safeArrayJoin(context?.claimType);
   const propertyType        = safeString(context?.propertyType);
   const propertyAge         = safeString(context?.propertyAge);
   const constructionType    = safeString(context?.constructionType);
   const currentUse          = safeString(context?.currentUse);
   const squareFootage       = safeString(context?.squareFootage);
-  const location            = safeString(context?.address);
-  const clientName          = safeString(context?.clientName);
+  const address             = safeString(context?.address);
+  const engineerName        = safeString(context?.engineerName);
+  const engineerEmail       = safeString(context?.engineerEmail);
+  const engineerLicense     = safeString(context?.engineerLicense);
+  const engineerPhone       = safeString(context?.engineerPhone);
+  const propertyOwnerName   = safeString(context?.propertyOwnerName);
+  const projectName         = safeString(context?.projectName);
 
-  // Engineer credentials
-  const engineerName    = safeString(context?.engineerName, 'Engineer Name');
-  const engineerEmail   = safeString(context?.engineerEmail, 'Engineer Email');
-  const engineerLicense = safeString(context?.engineerLicense, 'Engineer License Number');
-  const engineerPhone   = safeString(context?.engineerPhone, 'Engineer Phone');
+  // Affected areas
+  const affectedAreas       = safeArrayJoin(context?.affectedAreas);
 
-  // A dictionary of base prompts
+  // Summarize roof types from checkboxes
+  let roofTypesDetected = '';
+  if (context?.roofMetalChecked) {
+    roofTypesDetected += 'Metal, ';
+  }
+  if (context?.roofCompChecked) {
+    roofTypesDetected += 'Composition Shingles, ';
+  }
+  if (context?.roofSinglePlyChecked) {
+    roofTypesDetected += 'Single-Ply Membrane, ';
+  }
+  if (context?.roofModBitChecked) {
+    roofTypesDetected += 'Modified Bitumen, ';
+  }
+  if (context?.roofBURChecked) {
+    roofTypesDetected += 'Built Up Roofing (Gravel Ballast), ';
+  }
+  if (context?.roofClayTileChecked) {
+    roofTypesDetected += 'Clay Tile, ';
+  }
+  if (context?.roofConcreteTileChecked) {
+    roofTypesDetected += 'Concrete Tile, ';
+  }
+  // remove trailing comma
+  roofTypesDetected = roofTypesDetected.replace(/,\s*$/, '');
+
+  // Weather data
+  let weatherSummary = '';
+  if (weatherData?.note) {
+    weatherSummary = `Weather Data Note: ${weatherData.note}`;
+  } else if (Object.keys(weatherData || {}).length > 0) {
+    weatherSummary = JSON.stringify(weatherData, null, 2);
+  }
+
+  // Large system instruction
+  const bigSystemInstruction = `
+You are an expert forensic engineer generating professional report sections. 
+Use only the data from user inputs; do not invent details that contradict them.
+Utilize the engineer inputs and create sound, detailed, and objective arguments in defense of substantiating the claim.
+
+Guidelines:
+1. Use formal, technical language
+2. Include specific context details
+3. Maintain logical flow
+4. Support conclusions with evidence
+5. Reference documentation appropriately
+6. Use unique phrasing
+7. Ensure completeness
+8. Incorporate custom instructions while maintaining standards
+9. For the Table of Contents, use a clean, minimal layout in Markdown. Avoid bullet points and asterisks and hashtags.
+10. Make it so that each section is as long and detailed as possible.
+11. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
+12. Utilize the engineer inputs and create sound, detailed, and objective arguments in defense of substantiating the claim.
+13. Be lenghty and detailed throughout.
+
+Key points:
+1. Do NOT invent roofing types if user only specifies certain categories.
+2. Do NOT mention multiple floors if user has not indicated that (avoid referencing an upper floor if not specified).
+3. Keep Date of Loss (${dateOfLoss}) separate from Inspection Date (${investigationDate}).
+4. If weather data is missing or the date was in the future, note that briefly rather than printing "N/A".
+5. Avoid placeholders like [e.g., ...], [Third Party], etc.
+6. The user’s claim types: ${claimTypeString}.
+7. The indicated roof categories: ${roofTypesDetected}.
+8. The property address: ${address}.
+9. The property owner (or project name): ${propertyOwnerName} / ${projectName}.
+10. The building type: ${propertyType}, age: ${propertyAge}, use: ${currentUse}, sq ft: ${squareFootage}.
+11. Weather Data Summary: ${weatherSummary}
+`;
+
   const basePrompts = {
     introduction: `
-You are writing the "Introduction" section for a forensic engineering report.
-DO NOT invent placeholder addresses. Use this address: "${safeString(context?.address, 'N/A')}"
-DO NOT invent placeholder text like [Client Name or Entity]. Use "${clientName}" or "N/A" if missing.
-for the property location.
-
-Points to Cover:
-1. Reason for inspection (hail, wind, etc.)
-2. Property type: ${safeString(context?.propertyType)}
-3. Date(s) involved: ${safeString(context?.dateOfLoss)} or ${safeString(context?.investigationDate)}
-4. Any other relevant background from context
-
-Mention that further details follow in subsequent sections.
-Maintain a concise, professional tone, and professional engineering language.
+You are writing the "Introduction" for a forensic engineering report.
+- Address: ${address}
+- Date of Loss: ${dateOfLoss}
+- Investigation Date: ${investigationDate}
+- Claim Type(s): ${claimTypeString}
+Explain the purpose of the inspection (hail, wind, etc.).
+Do not add contradictory roofing details.
 `,
 
     authorization: `
-You are writing the "Authorization and Scope of Investigation" section for a forensic engineering report.
-DO NOT invent placeholder text like [Client Name or Entity]. 
-Use "${clientName}" or "N/A" if missing.
-
-Include a concise background:
-- Investigation Date: ${investigationDate}
-- Property Name (Project): ${clientName}
-- Claim Type(s): ${claimTypeString}
-
-Required Points:
-1) Who authorized the investigation
-2) The scope of work
-3) Outline major tasks (site visit, photos, etc.)
-4) Mention attachments if any
+You are writing the "Authorization and Scope of Investigation" section.
+Include:
+1) Who authorized it (e.g., property owner or law firm).
+2) The scope of work (site visit, photos, etc.).
+3) Summarize major tasks.
+4) Note any references if available.
 `,
 
     background: `
-You are writing the "Background Information" section for a forensic engineering report.
-DO NOT invent placeholder text. Use "${clientName}" or "N/A" if missing.
-
-Property details:
+You are writing "Background Information."
+Include relevant details:
 - Property Type: ${propertyType}
-- Property Age: ${propertyAge} years
+- Age: ${propertyAge}
 - Construction Type: ${constructionType}
 - Current Use: ${currentUse}
 - Square Footage: ${squareFootage}
+- Project Name: ${projectName}
+- Property Owner: ${propertyOwnerName}
+No placeholders or contradictory info.
 `,
 
     observations: `
-You are writing the "Site Observations and Analysis" section.
-DO NOT invent placeholders. Use actual context.
+You are writing "Site Observations and Analysis."
+Affected areas: ${affectedAreas}.
+Roof categories indicated: ${roofTypesDetected}.
+Claim type(s): ${claimTypeString}.
 
-Affected Areas: ${safeArrayJoin(context?.affectedAreas, 'None')}
-
-Required Points:
-1) Summarize observations
-2) Briefly analyze correlation with claimed cause(s): ${claimTypeString}
-3) Reference photos or tests if needed
+Only mention what the user indicated. 
 `,
 
     moisture: `
-You are writing the "Survey" (Moisture) section for a forensic engineering report.
-Discuss any moisture surveys or mention none if not applicable.
-Use professional engineering language.
+"Survey" (Moisture) section.
+If user indicated interior water intrusion, mention it. Otherwise, be concise.
 `,
 
     meteorologist: `
-You are writing the "Meteorologist Report" section.
-DO NOT use placeholders.
-
-Weather Data: ${JSON.stringify(weatherData, null, 2)}
-
-Focus on wind speeds, hail possibility, precipitation, etc.,
-and how they correlate to the claimed damages.
+"Meteorologist Report" section.
+Use the data:
+${weatherSummary}
+If not available or date is in the future, note it. 
 `,
 
     conclusions: `
-You are writing the "Conclusions and Recommendations" section.
-DO NOT use placeholders. The address/location should be from ${safeString(context?.address)}
-
-1) Summarize main findings
-2) Tie back to the cause(s) of loss
-3) Outline recommended next steps or repairs
+"Conclusions and Recommendations."
+Summarize your final opinion on cause(s) of loss. 
+Propose next steps or repairs if relevant.
 `,
 
     rebuttal: `
-You are writing the "Rebuttal" section.
-DO NOT use placeholders.
-
-Address any third-party reports or conflicting opinions with professional analysis.
+"Rebuttal" section. 
+If no third-party or conflicting reports were indicated, keep minimal. 
+Otherwise, address them if user provided details.
 `,
 
     limitations: `
-You are writing the "Limitations" section.
-DO NOT use placeholders.
-
-Include typical disclaimers about scope, data reliance, and so on.
+"Limitations" section.
+Typical disclaimers about data reliance, scope boundaries, site access, etc.
+No placeholders.
 `,
 
     tableofcontents: `
-You are generating a "Table of Contents" in markdown for a forensic engineering report. 
-DO NOT use placeholders.
-
-It should include (and all of it should be about the same font size as the rest of the report):
-1. Introduction
-2. Authorization and Scope of Investigation
-3. Background Information
-4. Site Observations and Analysis
-5. Survey
-6. Meteorologist Report
-7. Conclusions and Recommendations
-8. Rebuttal
-9. Limitations
+"Table of Contents" in markdown, headings in this order:
+1. Opening Letter
+2. Introduction
+3. Authorization and Scope of Investigation
+4. Background Information
+5. Site Observations and Analysis
+6. Survey
+7. Meteorologist Report
+8. Conclusions and Recommendations
+9. Rebuttal
+10. Limitations
 `,
 
     openingletter: `
-You are writing an "Opening Letter" for the final forensic engineering report.
-It should appear before the Table of Contents.
-
-DO NOT invent placeholders. Use actual data or 'N/A' if missing.
-
-For example:
----
-Date of Loss: ${dateOfLoss}
-Cause(s): ${claimTypeString}
-Property: ${clientName}
-Location: ${location}
-
-Dear ${clientName},
-
-North Star Forensics, LLC (NSF) is pleased to submit this report 
-for the above-referenced file. By signature below, this report was authorized 
-and prepared under the direct supervision of the undersigned professional.
-
-Please contact us if you have any questions regarding this report.
-
-Signed,
-${engineerName}
-License No. ${engineerLicense}
-Email: ${engineerEmail}
-Phone: ${engineerPhone}
----
+"Opening Letter" for the final report.
+Include:
+- Date of Loss: ${dateOfLoss}
+- Investigation Date: ${investigationDate}
+- Claim Type(s): ${claimTypeString}
+- Address: ${address}
+- Brief greeting
+- Signature block: ${engineerName}, License: ${engineerLicense}, Email: ${engineerEmail}, Phone: ${engineerPhone}
 `
   };
 
-  // Normalize the requested section name
   const normalizedSection = (sectionName || '').trim().toLowerCase();
+  const fallbackPrompt = `Write a professional section: ${sectionName}, using only user inputs.`;
 
-  // Fallback if not found
-  const fallbackPrompt = `Write a professional engineering section about "${sectionName}". 
-Do not use placeholders like [Client Name]. Use actual context or 'N/A'.`;
-
-  // Base prompt or fallback
   const basePrompt = basePrompts[normalizedSection] || fallbackPrompt;
 
-  // Merge custom instructions
   const safeCustom = safeString(customInstructions, '');
-  const finalPrompt = safeCustom
-    ? `${basePrompt}\n\nAdditional Instructions: ${safeCustom}`
+  const finalPrompt = safeCustom 
+    ? `${basePrompt}\n\nAdditional instructions:\n${safeCustom}`
     : basePrompt;
 
-  return finalPrompt;
+  // Merge with big system instructions
+  const fullPrompt = `
+${bigSystemInstruction}
+
+Now produce the "${sectionName}" section.
+
+${finalPrompt}
+`;
+
+  return fullPrompt;
 }
 
-/**
- * Netlify serverless function entry point
- */
-exports.handler = async function(event, context) {
+exports.handler = async function(event) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -482,63 +521,31 @@ exports.handler = async function(event, context) {
   try {
     const { section, context: userContext, customInstructions } = JSON.parse(event.body) || {};
 
-    // If the user is generating tableOfContents, openingLetter, or introduction, 
-    // we can skip weather data. For everything else, attempt weather fetch.
+    // Weather data fetch, skip for tableOfContents, openingLetter, introduction
     let weatherResult = { success: true, data: {} };
     const lowerSection = (section || '').trim().toLowerCase();
 
     if (!['tableofcontents', 'openingletter', 'introduction'].includes(lowerSection)) {
-      // Safely parse dateOfLoss
       const dateObj = safeParseDate(userContext?.dateOfLoss);
-      if (dateObj && userContext?.location) {
-        const dateToUse = dateObj.toISOString().split('T')[0];
-        weatherResult = await getWeatherData(userContext.location, dateToUse);
+      if (dateObj && userContext?.address) {
+        // Attempt weather call
+        weatherResult = await getWeatherData(userContext.address, dateObj.toISOString().split('T')[0]);
       }
     }
 
     // Build prompt
     const prompt = await generateSectionPrompt(section, userContext, weatherResult.data, customInstructions);
 
-    // If somehow we got null or empty prompt, fallback
-    const finalPrompt = prompt || 'No prompt data available. Please proceed.';
-
-    // Create the chat completion
+    // Create chat completion
     const completion = await openai.chat.completions.create({
       model: 'chatgpt-4o-latest',
       messages: [
         {
           role: 'system',
-          content: `
-You are an expert forensic engineer generating professional report sections. 
-Guidelines:
-1. Use formal, technical language
-2. Include specific context details
-3. Maintain logical flow
-4. Support conclusions with evidence
-5. Reference documentation appropriately
-6. Use unique phrasing
-7. Ensure completeness
-8. Incorporate custom instructions while maintaining standards
-9. Do NOT invent or use placeholders like [Client Name]. Use actual context values or 'N/A'.
-10. For the Table of Contents, use a clean, minimal layout in Markdown. Avoid bullet points or asterisks.
-11. Do not use any brackets like this [] as placeholders to suggest something. If you don't know what it is, just ignore it or don't talk about it.
-12. Do not call "Table of Contents" by its name at the top, because it is appearing twice. Similarly, do not call "Introduction" by its name in the final draft because it too is appearing twice.
-13. Make it so that each section is as long and detailed as possible. But don't ever end a section in midsentence. If you have to do that, just make it shorter to complete the last thought.
-14. And don't say things like "on [specific date],". Again, I emphasize, either use the date you have from the input, or if you don't know it, just don't say aything about it.
-15. Also, do not call "Conclusions and Recommendations" by its name in the final draft because it too is appearing twice.
-16. And do not call "Limitations" by its name in the final draft because it too is appearing twice.
-17. And do not call "Rebuttal" by its name in the final draft because it too is appearing twice.
-18. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
-19. Try to never use N/A anywhere. And try very hard not to use it. Always try to get the information from the initial inputs from the first page for the user.
-20. For Location near the top of the Opening Letter, it should not say N/A. It should give the location from the input of Address under Project Data.
-`
-        },
-        {
-          role: 'user',
-          content: finalPrompt
+          content: prompt
         }
       ],
-      temperature: 0.4,  // Lower temperature = less creative filler
+      temperature: 0.0, // reduce "creative" contradictions
       max_tokens: 4000
     });
 
@@ -551,7 +558,6 @@ Guidelines:
         weatherData: weatherResult.data
       })
     };
-
   } catch (error) {
     console.error('Error in generate-report function:', error);
     return {
