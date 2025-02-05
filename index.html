@@ -1330,9 +1330,9 @@
     document.getElementById('submitRating').addEventListener('click', () => {
       const rating = document.querySelector('.rating-button.bg-blue-500')?.dataset.rating || '';
       const feedback = document.getElementById('ratingFeedback').value;
-      console.log(`Section ${reportSections[currentSectionIndex].id} rated: ${rating}/7`);
+      console.log(`Section ${reportSections[currentSectionIndex].id} rated: ${rating}/10`);
       console.log(`Feedback: ${feedback}`);
-      document.getElementById('ratingMessage').textContent = `Rating of ${rating}/7 submitted!`;
+      document.getElementById('ratingMessage').textContent = `Rating of ${rating}/10 submitted!`;
       document.getElementById('ratingMessage').classList.remove('hidden');
       document.getElementById('ratingPopup').classList.add('hidden');
     });
