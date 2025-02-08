@@ -362,12 +362,11 @@ Guidelines:
 5. Reference documentation appropriately
 6. Use unique phrasing
 7. Ensure completeness
-8. Incorporate custom instructions while maintaining standards
-9. For the Table of Contents, use a clean, minimal layout in Markdown. Avoid bullet points and asterisks and hashtags.
-10. Make it so that each section is as long and detailed as possible.
-11. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
-12. Utilize the engineer inputs and create sound, detailed, and objective arguments in defense of substantiating the claim.
-13. Be lenghty and detailed throughout.
+8. Incorporate custom instructions while maintaining standards.
+9. Make it so that each section is as long and detailed as possible.
+10. Make all the formatting uniform, with all the main headings the same font in bold, and all the rest of the text smaller font.
+11. Utilize the engineer inputs and create sound, detailed, and objective arguments in defense of substantiating the claim.
+12. Be lenghty and detailed throughout.
 
 Key points:
 1. Do NOT invent roofing types if user only specifies certain categories.
@@ -456,17 +455,25 @@ No placeholders.
 `,
 
     tableofcontents: `
-"Table of Contents" in markdown, headings in this order:
-1. Opening Letter
-2. Introduction
-3. Authorization and Scope of Investigation
-4. Background Information
-5. Site Observations and Analysis
-6. Survey
-7. Meteorologist Report
-8. Conclusions and Recommendations
-9. Rebuttal
-10. Limitations
+You are writing the "Table of Contents" section. Follow these formatting rules precisely:
+
+1) Print "**Table of Contents**" (in bold) on a line by itself.
+2) Then each section name on its own line, with a bullet point.
+3) The final text should look like this (with line breaks and bullet points for each of the section names):
+
+**Table of Contents**
+Opening Letter
+Introduction
+Authorization and Scope
+Background Information
+Site Observations and Analysis
+Survey
+Meteorologist Report
+Conclusions and Recommendations
+Rebuttal
+Limitations
+
+No extra words, no additional punctuation, and exactly one section name per line.
 `,
 
     openingletter: `
